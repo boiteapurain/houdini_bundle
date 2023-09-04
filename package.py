@@ -1,43 +1,37 @@
 # -*- coding: utf-8 -*-
 
-version = '19.0.561'
+name = 'houdini_bundle'
 
+version = '19.5.403.std.1.1'
+
+description = 'Houdini Side Fx package.'
+
+authors = ['It']
+
+variants = [['~python-3.9']]
 
 def commands():
-    if system.platform == 'linux':
-
-        ##########
-        # NO GPU #
-        ##########
+    global system
+    global env
+    
+    software = "19.5.403"
+    
+    if system.platform == "linux":
+        # NO GPU
         env.HOUDINI_OCL_DEVICENUMBER.append(0)
-        env.HOUDINI_OCL_DEVICETYPE.append('CPU')
+        env.HOUDINI_OCL_DEVICETYPE.append("CPU")
         env.HOUDINI_USE_HFS_OCL.append(0)
-
-        ########
-        # MAIN #
-        ########
-
+    
         # HOUDINI BASIC CONFIG
-        env.HFS.append('/opt/hfs{version}')
-
+        env.HFS.append(f"/opt/hfs{software}")
+    
         # PATH
-        env.PATH.append('/opt/hfs{version}/bin')
-        env.PATH.append('/opt/hfs{version}/python/bin')
-
-        # HOUDINI_PATH
-        env.PYTHONPATH.append('/opt/{version}/python/lib/python3.7')
-        env.PYTHONPATH.append(
-            '/opt/{version}/python/lib/python3.7/site-packages')
-
-        #######
-        # HDK #
-        #######
-
+        env.PATH.append(f"/opt/hfs{software}/bin")
+        env.PATH.append(f"/opt/hfs{software}/python/bin")
+    
         # CMAKE CONFIG
-        env.CMAKE_PREFIX_PATH.append('/opt/hfs{version}/toolkit/cmake')
+        env.CMAKE_PREFIX_PATH.append(f"/opt/hfs{software}/toolkit/cmake")
 
-        # TO KEEP for no graphic card on laptop
-        # HOUDINI_OCL_DEVICETYPE
-        # HOUDINI_USE_HFS_OCL
-        # HOUDINI_OCL_DEVICETYPE
-        # HOUDINI_USE_HFS_OCL
+timestamp = 1693670763
+
+format_version = 2
